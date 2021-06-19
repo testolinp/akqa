@@ -1,16 +1,23 @@
 import { useBasket } from '../../../core/context/basket';
 
 const Item = ({id, product, price, qty}) => {
-  const { removeProduct } = useBasket();
+  const { removeProduct, quantityProduct } = useBasket();
+  const cost = (price * qty).toFixed(2);
 
   return (
     <div className="item">
       <p>{product}</p>
       <span>£{price}</span>
       <div>
-        <input type="number" defaultValue={qty} />
+        <input
+          type="number"
+          min="1"
+          max="10"
+          value={qty}
+          onChange={(e) => quantityProduct(id, e.target.value)}
+        />
       </div>
-      <span className="cost">£{price * qty}</span>
+      <span className="cost">£{cost}</span>
       <button className="delete" onClick={() => removeProduct(id)}>
         <img src="images/delete.png" alt="Remove product from Basket" />
       </button>
@@ -39,6 +46,7 @@ const Item = ({id, product, price, qty}) => {
 
           input {
             width: 40px;
+            text-align: right;
           }
 
           .cost {

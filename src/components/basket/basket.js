@@ -4,6 +4,17 @@ import Item from './item/item';
 const Basket = () => {
   const { basketItems, getBasketSubtotal, getBasketVat, getTotal } = useBasket();
 
+  const handlerBuyNow = () => {
+    const resume = {
+      items: basketItems,
+      subtotal: parseFloat(getBasketSubtotal()),
+      vat: parseFloat(getBasketVat()),
+      total: parseFloat(getTotal())
+    }
+
+    alert(JSON.stringify(resume));
+  }
+
   return (
     <>
       <div className="grid">
@@ -33,7 +44,9 @@ const Basket = () => {
         </div>
       </div>
       <div className="btn">
-        <button disabled={!basketItems.length}>Buy Now <span>{`>>`}</span></button>
+        <button disabled={!basketItems.length} onClick={() => handlerBuyNow()}>
+          Buy Now <span>{`>>`}</span>
+        </button>
       </div>
       <style jsx>
         {`

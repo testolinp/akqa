@@ -20,8 +20,25 @@ export const BasketProvider = (props) => {
     setBasketItems(removedBasket);
   };
 
+  const quantityProduct = (id, qty) => {
+    let setQty = qty;
+
+    if(qty > 10)
+      setQty = 10
+
+    if(qty < 1)
+      setQty = 1
+
+    setBasketItems(
+      basketItems.map(item =>
+        item.id === id
+        ? Object.assign(item, {qty: setQty})
+        : item)
+    );
+  }
+
   const getBasketSubtotal = () => {
-    return basketItems.reduce((prev, act) => prev + (act.price * act.qty), 0);
+    return basketItems.reduce((prev, act) => prev + (act.price * act.qty), 0).toFixed(2);
   }
 
   const getBasketVat = () => {
@@ -36,6 +53,7 @@ export const BasketProvider = (props) => {
     basketItems,
     initializeBasket,
     removeProduct,
+    quantityProduct,
     getBasketSubtotal,
     getBasketVat,
     getTotal

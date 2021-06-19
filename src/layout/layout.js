@@ -37,6 +37,7 @@ const Layout = ({ children }) => {
           margin: 0 auto;
           max-width: 500px;
           min-height: calc(100vh - 41px);
+          padding-bottom: 120px;
         }
 
         .wrapper {
