@@ -19,6 +19,7 @@ const Item = ({id, product, price, qty}) => {
               min="1"
               max="10"
               value={qty}
+              aria-label={`Set quantity for ${product}`}
               onChange={(e) => quantityProduct(id, e.target.value)}
             />
           </div>
