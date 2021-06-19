@@ -88,6 +88,7 @@ export default css.global`
     font: inherit;
     vertical-align: baseline;
     line-height: 1.5;
+    box-sizing: border-box;
   }
 
   html {
