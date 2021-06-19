@@ -2,7 +2,7 @@ import { useBasket } from '../../core/context/basket';
 import Item from './item/item';
 
 const Basket = () => {
-  const { basketItems } = useBasket();
+  const { basketItems, getBasketSubtotal, getBasketVat, getTotal } = useBasket();
 
   return (
     <>
@@ -21,15 +21,15 @@ const Basket = () => {
       <div className="results">
         <div className="results-row">
           <p>Subtotal</p>
-          <span>11.96</span>
+          <span>£{getBasketSubtotal()}</span>
         </div>
         <div className="results-row">
           <p>VAT @20%</p>
-          <span>11.96</span>
+          <span>£{getBasketVat()}</span>
         </div>
         <div className="results-row results-row--cost">
           <p>Total cost</p>
-          <span>11.96</span>
+          <span>£{getTotal()}</span>
         </div>
       </div>
       <div className="btn">

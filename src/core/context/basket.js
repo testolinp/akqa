@@ -20,10 +20,25 @@ export const BasketProvider = (props) => {
     setBasketItems(removedBasket);
   };
 
+  const getBasketSubtotal = () => {
+    return basketItems.reduce((prev, act) => prev + (act.price * act.qty), 0);
+  }
+
+  const getBasketVat = () => {
+    return (getBasketSubtotal() * 0.2).toFixed(2)
+  }
+
+  const getTotal = () => {
+    return (parseFloat(getBasketSubtotal()) + parseFloat(getBasketVat())).toFixed(2);
+  }
+
   const value = {
     basketItems,
     initializeBasket,
-    removeProduct
+    removeProduct,
+    getBasketSubtotal,
+    getBasketVat,
+    getTotal
   };
 
   return <BasketContext.Provider value={value} {...props} />;
