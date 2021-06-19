@@ -1,5 +1,6 @@
 import { ScreenClassRender, Visible } from 'react-grid-system';
 import { breakpoints } from '../../../core/constant';
+import Image from 'next/image';
 import { useBasket } from '../../../core/context/basket';
 
 const Item = ({id, product, price, qty}) => {
@@ -23,7 +24,7 @@ const Item = ({id, product, price, qty}) => {
           </div>
           <Visible sm md lg xl xxl><span className="cost">£{cost}</span></Visible>
           <button className="delete" onClick={() => removeProduct(id)}>
-            <img src="images/delete.png" alt="Remove product from Basket" />
+            <Image src="/images/delete.png" width={18} height={25} alt="Remove product from Basket" />
           </button>
           <style jsx>
             {`
