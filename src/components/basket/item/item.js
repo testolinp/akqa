@@ -1,20 +1,27 @@
-const Item = () => {
+import { useBasket } from '../../../core/context/basket';
+
+const Item = ({id, product, price, qty}) => {
+  const { removeProduct } = useBasket();
+
   return (
     <div className="item">
-      <p>Cotton T-Shirt, Medium</p>
-      <span>£1.99</span>
+      <p>{product}</p>
+      <span>£{price}</span>
       <div>
-        <input type="number" />
+        <input type="number" defaultValue={qty} />
       </div>
-      <span className="cost">£1.99</span>
-
+      <span className="cost">£{price * qty}</span>
+      <button className="delete" onClick={() => removeProduct(id)}>
+        <img src="images/delete.png" alt="Remove product from Basket" />
+      </button>
       <style jsx>
         {`
           .item {
             display: grid;
+            font-size: 16px;
             grid-template-columns: 52% repeat(3, 16%);
             padding: 8px 20px;
-            font-size: 16px;
+            position: relative;
             text-align: center;
           }
 
@@ -36,6 +43,20 @@ const Item = () => {
 
           .cost {
             text-align: right;
+          }
+
+          .delete {
+            position: absolute;
+            top: 6px;
+            right: -30px;
+            width: 30px;
+            height: 30px;
+            border: 0 none;
+            background: transparent;
+          }
+
+          .delete:focus {
+            outline: 1px dotted rgba(0, 0, 0, .3);
           }
         `}
       </style>

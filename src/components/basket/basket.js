@@ -1,6 +1,9 @@
+import { useBasket } from '../../core/context/basket';
 import Item from './item/item';
 
 const Basket = () => {
+  const { basketItems } = useBasket();
+
   return (
     <>
       <div className="grid">
@@ -10,9 +13,10 @@ const Basket = () => {
           <p>Qty</p>
           <p>Cost</p>
         </div>
-        <Item />
-        <Item />
-        <Item />
+        {basketItems.map((item, index) =>
+          <Item key={index} {...item} />
+        )}
+        {!!basketItems.length || <p className="empty">Cart is Empty</p>}
       </div>
       <div className="results">
         <div className="results-row">
@@ -29,7 +33,7 @@ const Basket = () => {
         </div>
       </div>
       <div className="btn">
-        <button>Buy Now <span>{`>>`}</span></button>
+        <button disabled={!basketItems.length}>Buy Now <span>{`>>`}</span></button>
       </div>
       <style jsx>
         {`
@@ -94,9 +98,23 @@ const Basket = () => {
             padding: 0 8px;
           }
 
+          .btn button:focus {
+            outline: 1px dotted rgba(0, 0, 0, .3);
+            outline-offset: 4px;
+          }
+
+          .btn button:disabled {
+            opacity: .4;
+          }
+
           .btn button span {
             font-size: 12px;
             letter-spacing: -1px;
+          }
+
+          .empty {
+            font-size: 14px;
+            padding: 0 var(--gutter);
           }
         `}
       </style>
